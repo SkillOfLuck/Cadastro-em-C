@@ -1,0 +1,196 @@
+#include <stdlib.h>
+   #include <string.h>
+#include <stdio.h>
+#include <locale.h>
+typedef struct{
+  char nome[20];
+  int matricula;
+  float nota;
+}cadastro;
+typedef struct{
+char nome[105];
+}tabela;
+void criar(cadastro *pessoa, int x){
+ printf("digite o nome do %d° Aluno\n", x+1);
+ scanf ("%s", pessoa->nome);
+ printf("digite a matricula do %d° Aluno\n", x+1);
+  scanf ("%d", &pessoa->matricula);
+ printf("digite a nota do %d° Aluno\n", x+1);
+   scanf ("%f", &pessoa->nota);
+ system("cls || clear");
+}
+void mostrar (cadastro pessoa){
+    printf("%s\n", pessoa.nome);
+    printf("%d\n", pessoa.matricula);
+    printf("%.2f\n", pessoa.nota);
+}
+    
+
+void  excluir() {
+    
+}
+int buscar(cadastro buscar[], int busc){
+    int x,a=1;
+    char buscanome[20];
+    int buscamatricula;
+    float buscanota;
+    tabela busca[5]={{"Nome"},{"Matricula"},{"Nota"},{"Sair"}};
+    setbuf(stdin,NULL);
+    while(a!=0){
+        printf("Digite qual destes deseja buscar:\n");
+        for (x=0; x<=3; x++){
+            printf("%d\t | %s\n", x+1, busca[x].nome);
+        }
+        scanf("%d", &x);
+        switch (x){
+            case 1:
+            printf("Digite o nome que deseja buscar:\n");
+            scanf("%s", buscanome);
+            for (int i = 0; i < busc; i++) {
+              if (strcmp(buscar[i].nome, buscanome) == 0){
+   return i;
+}
+    
+}
+            break;
+            case 2:
+           printf("Digite a matricula que deseja buscar:\n");
+            scanf("%d", &buscamatricula);
+            for (int i = 0; i < busc; i++) {
+              if (buscar[i].matricula == buscamatricula){
+                  a=0;
+     return i;
+}
+}
+            break;
+            case 3:
+            printf("Digite a Nota que deseja buscar:\n");
+            scanf("%f", &buscanota);
+            for (int i = 0; i < busc; i++) {
+              if (buscar[i].nota == buscanota){
+                  a=0;
+     return i;
+}
+}
+            break;
+            case 4:
+            a=0;
+            break;
+            default:
+            printf("Opção invalida!");
+            break;
+            
+        }
+        
+}
+}
+void alterar(cadastro alterar[], int x){
+    int a=buscar(alterar, x);
+printf("voce esta na pessoa %d oque deseja alterar?\n",a);
+tabela busca[5]={{"Nome"},{"Matricula"},{"Nota"},{"Sair"}};
+    setbuf(stdin,NULL);
+    while(a!=0){
+        printf("Digite qual destes deseja buscar:\n");
+        for (x=0; x<=3; x++){
+            printf("%d\t | %s\n", x+1, busca[x].nome);
+        }
+        scanf("%d", &x);
+        switch (x){
+            case 1:
+            printf("Digite o novo nome:\n");
+            scanf("%s",alterar[a].nome );
+            break;
+            case 2:
+            printf("Digite a nova matricula:\n");
+            scanf("%d", &alterar[a].matricula);
+            break;
+            case 3:
+           printf("Digite a nova Nota:\n");
+            scanf("%f", &alterar[a].nota);
+  break;
+            case 4:
+            a=0;
+            break;
+            default:
+            printf("Opção invalida!");
+            break;
+            
+        }
+        
+}
+}
+float medianota(cadastro paraNotas[], int x){
+    float mediaGeral=0;
+    for (int y= 0; y<=x; y++){
+       mediaGeral=mediaGeral +paraNotas[y].nota;
+    }
+    return mediaGeral/x;
+}
+void main()
+{
+    setlocale(LC_ALL, "Portuguese");
+    int x, y=0, a, b=1, c=1;
+    printf("digite quantas pessoas voce deseja adicionar\n -Nota: no minimo 5 pessoas devem ser adicionadas\n");
+    scanf ("%d", &x);
+    cadastro pessoas[x];
+    tabela busca[7]={{"Criar novo aluno"},{"Mostrar alunos"},{"Buscar por Aluno"},{"Alterar dados do aluno"}, {"Ver media da Turma"},{"Sair"}};
+    setbuf(stdin,NULL);
+    while(c!=0){
+    if (x>=5){
+        switch (b){
+            case 1:
+               system("cls || clear");
+    while(y<x){
+        criar(&pessoas[y], y);
+        y++;
+    }
+            break;
+            case 2:
+            system("cls || clear");
+           y=0;
+    while(y<x){
+    mostrar(pessoas[y]);
+    y++;
+    }
+            break;
+            case 3:
+            system("cls || clear");
+            
+     a=buscar(pessoas, x);
+     printf("O aluno que esta buscando é a pessoa %d\n", a);
+    mostrar(pessoas[a]);
+            break;
+            case 4:
+            system("cls || clear");
+             alterar(pessoas,x);
+            break;
+            case 5:
+            system("cls || clear");
+             printf("Media da turma:%.2f\n",medianota(pessoas, x));
+            break;
+            case 6:
+            system("cls || clear");
+            printf("Obrigado por utilizar volte sempre!");
+             c=0;
+            break;
+            default:
+            system("cls || clear");
+            printf("Opção invalida!");
+            break;
+            
+        }
+        printf("Digite oque deseja fazer:\n");
+        for (x=0; x<=5; x++){
+            printf("%d\t | %s\n", x+1, busca[x].nome);
+        }
+        scanf("%d", &b);
+        system("cls || clear");
+    }else{
+        printf("Observe que o numero de alunos deve ser maior do que 5!\n -tente novamente\n");
+        system("cls || clear");
+        printf("digite quantas pessoas voce deseja adicionar\n -Nota: no minimo 5 pessoas devem ser adicionadas\n");
+    scanf ("%d", &x);
+    }
+    }
+    
+}
